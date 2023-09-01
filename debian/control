@@ -3,6 +3,7 @@ Section: net
 Priority: optional
 Maintainer: Adrian Granados <adrian@intuitibits.com>
 Build-Depends:
+  debhelper (>=9),
   libnl-3-dev (>= 3.2.3-2~),
   libnl-genl-3-dev (>= 3.2.3-2~),
   libpcap-dev
@@ -10,7 +11,8 @@ Vcs-Git: https://github.com/intuitibits/scandump.git
 Rules-Requires-Root: no
 
 Package: scandump
-Architecture: linux-any
+Architecture: arm64 armhf
+Multi-Arch: foreign
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: A command line utility that scans for wireless networks 
  using the 802.11 netlink API and outputs the scan results in PCAP format.
