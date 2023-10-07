@@ -1,3 +1,9 @@
+scandump (2.0) unstable; urgency=medium
+
+  *  Add "count", "passive", and "frequency" arguments to configure scan.
+
+ -- Adrian Granados <adrian@intuitibits.com>  Sat, 07 Oct 2023 11:50:03 -0400
+
 scandump (1.0.4) unstable; urgency=medium
 
   * Initial release.
