@@ -1,3 +1,9 @@
+scandump (2.1) unstable; urgency=medium
+
+  *  Adds "Flags" to Radiotap header to indicate frames have no FCS at the end.
+
+ -- Adrian Granados <adrian@intuitibits.com>  Thu, 07 Mar 2024 11:36:00 -0400
+
 scandump (2.0) unstable; urgency=medium
 
   *  Add "count", "passive", and "frequency" arguments to configure scan.
