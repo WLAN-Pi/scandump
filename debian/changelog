@@ -1,3 +1,9 @@
+scandump (2.1.2) unstable; urgency=medium
+
+  *  Do not exit if scan is aborted.
+
+ -- Adrian Granados <adrian@intuitibits.com>  Sat, 12 Oct 2024 00:00:00 -0500
+
 scandump (2.1.1) unstable; urgency=medium
 
   *  Fixes "Channel Flags" in Radiotap header.
