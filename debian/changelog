@@ -1,3 +1,9 @@
+scandump (2.1.4) unstable; urgency=medium
+
+  *  Fixes crash that occurs when handling malformed probe responses.
+
+ -- Adrian Granados <adrian@intuitibits.com>  Sat, 22 Feb 2025 00:00:00 -0500
+
 scandump (2.1.3) unstable; urgency=medium
 
   *  Do not exit if scan fails; log error and continue.
