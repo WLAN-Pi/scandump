@@ -275,7 +275,7 @@ int do_scan_trigger(struct nl_sock *socket, int if_index, int genl_id, int passi
   nlmsg_free(msg);
   nl_cb_put(cb);
   nl_socket_drop_membership(socket, mcid);
-  return 0;
+  return ret;
 }
 
 void print_usage(const char *program_name)
@@ -359,6 +359,7 @@ int main(int argc, char *argv[]) {
         exit(EXIT_FAILURE);
       }
 
+      errno = 0;
       int freq = strtol(token, &endptr, 10);
       if (errno != 0 || *endptr != '\0') {
         fprintf(stderr, "invalid frequency: %s\n", token);
