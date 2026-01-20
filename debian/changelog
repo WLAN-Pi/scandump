@@ -1,3 +1,10 @@
+scandump (2.1.5) unstable; urgency=medium
+
+  * Fixes issue when parsing the frequency argument.
+  * Prevents infinite loop when an error occurs.
+ 
+ -- Adrian Granados <adrian@intuitibits.com>  Tue, 20 Jan 2026 00:00:00 -0500
+
 scandump (2.1.4) unstable; urgency=medium
 
   *  Fixes crash that occurs when handling malformed probe responses.
