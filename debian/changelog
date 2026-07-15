@@ -1,3 +1,11 @@
+scandump (2.1.6) unstable; urgency=medium
+
+  * Rebuild to publish packages for Debian trixie to packagecloud.
+  * CI: build for trixie only and do not post to Slack from fork PRs
+    (secrets are unavailable there).
+
+ -- Josh Schmelzle <josh@joshschmelzle.com>  Wed, 15 Jul 2026 02:51:58 -0400
+
 scandump (2.1.5) unstable; urgency=medium
 
   * Fixes issue when parsing the frequency argument.
