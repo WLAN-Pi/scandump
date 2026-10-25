@@ -1,3 +1,29 @@
+scandump (2.3.0) unstable; urgency=medium
+
+  * Package the scanner merged in #10.
+  * Add -i/--interval to wait a number of seconds between scans. The
+    default stays 0, so a run with no new flags still scans continuously.
+  * Behavior change: beacon frames keep every information element. Large
+    Wi-Fi 6E and Wi-Fi 7 beacons were cut off at 2048 bytes. The PCAP
+    snapshot length is 262144.
+  * Behavior change: networks with no dBm signal, and networks with a
+    beacon interval of 0, are written. Both used to be dropped.
+  * Behavior change: 5 GHz channel 177 (5885 MHz) gets radiotap channel
+    flags. Flags follow the band edges.
+  * Behavior change: giving up after 30 transient failures exits 240.
+  * Behavior change: if the program reading standard output closes the
+    pipe, scandump stops with status 0. A write error, such as a full
+    disk, exits non-zero.
+  * Behavior change: the package no longer installs
+    /etc/sudoers.d/scandump. The same rule is an example at
+    /usr/share/doc/scandump/examples/sudoers. A rule already on disk stays
+    across the upgrade.
+  * -V is a short form of --version. The version line reads
+    "scandump version 2.3.0". A fatal scan error is followed by a hint
+    for the common causes. scandump(8) documents the exit statuses.
+
+ -- jsz <josh@joshschmelzle.com>  Sun, 25 Oct 2026 16:45:19 +0000
+
 scandump (2.2.1) unstable; urgency=medium
 
   * Ignore scan events for other interfaces so a scan started by another
