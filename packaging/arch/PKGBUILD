@@ -1,7 +1,7 @@
 # Maintainer: Adrian Granados <support at intuitibits dot com>
 
 pkgname=scandump
-pkgver=2.2.1
+pkgver=2.3.0
 pkgrel=1
 pkgdesc='Command-line utility that writes Wi-Fi scan results in PCAP format'
 arch=('x86_64' 'aarch64' 'armv7h' 'i686')
