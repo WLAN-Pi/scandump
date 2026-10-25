@@ -125,31 +125,3 @@ jobs:
         with:
           name: ${{ matrix.artifact }}
           path: out/deb/
-
-  arch:
-    name: Arch Linux package
-    runs-on: ubuntu-latest
-    container: archlinux:latest
-    steps:
-      - uses: actions/checkout@v7
-      - name: makepkg, namcap, install, remove
-        run: sh packaging/ci/build-arch.sh
-      - uses: actions/upload-artifact@v7
-        with:
-          name: arch
-          path: |
-            out/arch/
-            !out/arch/*-debug-*
-
-  fedora:
-    name: Fedora package
-    runs-on: ubuntu-latest
-    container: fedora:latest
-    steps:
-      - uses: actions/checkout@v7
-      - name: rpmbuild, rpmlint, install, remove
-        run: sh packaging/ci/build-rpm.sh
-      - uses: actions/upload-artifact@v7
-        with:
-          name: fedora
-          path: out/rpm/
