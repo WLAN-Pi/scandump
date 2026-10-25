@@ -15,3 +15,8 @@ override_dh_auto_test:
 
 override_dh_auto_install:
 	dh_auto_install -- PREFIX=/usr
+
+# dwz 0.15, as on Ubuntu 24.04, rejects GCC's .debug_addr section and
+# fails the build. Debug compression is optional, so keep going.
+override_dh_dwz:
+	dh_dwz || true

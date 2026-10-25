@@ -54,7 +54,7 @@ sudo ./scandump -c 5 -i 10 wlan0 scan.pcap   # ... waiting 10 s between scans
 
 ## Packaging
 
-- `debian/` is the Debian/Ubuntu source package (`3.0 (quilt)`, maintainer
+- `debian/` is the Debian/Ubuntu source package (`3.0 (native)`, maintainer
   `Adrian Granados <support@intuitibits.com>`). `.gitattributes` keeps it out
   of release tarballs.
 - `packaging/arch/PKGBUILD` and `packaging/fedora/scandump.spec` hold the

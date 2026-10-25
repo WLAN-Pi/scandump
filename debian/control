@@ -1,7 +1,7 @@
 Source: scandump
 Section: net
 Priority: optional
-Maintainer: Adrian Granados <support@intuitibits.com>
+Maintainer: Adrian Granados <adrian@intuitibits.com>
 Build-Depends:
  debhelper-compat (= 13),
  libnl-3-dev,

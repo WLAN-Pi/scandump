@@ -46,11 +46,13 @@ lintian --info --display-info --pedantic --fail-on "${LINTIAN_FAIL_ON:-error,war
   ./*.changes
 
 echo "--- install / run / remove"
-apt-get install -y -qq "./scandump_${version}-"*.deb >/dev/null
+# Match both scandump_<version>_<arch>.deb (no Debian revision) and
+# scandump_<version>-<revision>_<arch>.deb.
+apt-get install -y -qq "./scandump_${version}"*.deb >/dev/null
 scandump --version
 # Check the package contents rather than the installed files: minimized
 # Ubuntu images drop man pages and docs at install time.
-contents=$(dpkg-deb -c "./scandump_${version}-"*.deb)
+contents=$(dpkg-deb -c "./scandump_${version}"*.deb)
 echo "$contents" | grep -q " ./usr/share/man/man8/scandump.8.gz$"
 echo "$contents" | grep -q " ./usr/share/doc/scandump/examples/sudoers$"
 # No privileges granted: nothing under /etc, no setuid/setgid files, no
@@ -62,7 +64,7 @@ fi
 if echo "$contents" | grep -qE "^-..[sS]|^-.....[sS]"; then
   echo "package contains setuid/setgid files" >&2; exit 1
 fi
-if dpkg-deb --ctrl-tarfile "./scandump_${version}-"*.deb | tar -t |
+if dpkg-deb --ctrl-tarfile "./scandump_${version}"*.deb | tar -t |
    grep -vqE "^\./(control|md5sums)?$"; then
   echo "package has maintainer scripts or conffiles" >&2; exit 1
 fi
