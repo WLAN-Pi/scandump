@@ -1,5 +1,5 @@
 Name:           scandump
-Version:        2.3.0
+Version:        2.2.1
 Release:        2%{?dist}
 Summary:        Command-line utility that writes Wi-Fi scan results in PCAP format
 
@@ -58,8 +58,8 @@ package does not grant either; see the README for setup options.
 
 
 %changelog
-* Fri Oct 23 2026 Adrian Granados <support@intuitibits.com> - 2.3.0-2
+* Fri Oct 23 2026 Adrian Granados <support@intuitibits.com> - 2.2.1-2
 - Call %%set_build_flags only on EL9 (review feedback)
 
-* Tue Oct 20 2026 Adrian Granados <support@intuitibits.com> - 2.3.0-1
+* Tue Oct 20 2026 Adrian Granados <support@intuitibits.com> - 2.2.1-1
 - Initial package
