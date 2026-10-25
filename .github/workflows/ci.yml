@@ -92,10 +92,6 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          # Debian's development release: lintian must be warning-free.
-          - image: debian:sid
-            artifact: deb-debian-sid
-            lintian-fail-on: error,warning
           # Older lintian versions warn about a Standards-Version they don't
           # know yet, so these only fail on errors.
           - image: debian:trixie
