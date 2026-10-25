@@ -598,8 +598,6 @@ static void test_exit_status(void) {
   CHECK(exit_status_for_error(0) == EXIT_RUNTIME_ERROR);
 }
 
-static void raise_stop_signal(int signum);
-
 // A write error (here, a full device) is reported rather than lost, and a
 // reader closing the pipe is told apart from it.
 static void test_output_errors(void) {
@@ -637,47 +635,6 @@ static void test_output_errors(void) {
     pcap_dump_close(dumper);
   }
   sigaction(SIGPIPE, &old, NULL);
-
-  // A full pipe makes the flush block. A stop signal during that flush is a
-  // clean interrupt (-EINTR, g_stop set), not a failed write.
-  int blocked[2];
-  CHECK(pipe(blocked) == 0);
-  int filler = dup(blocked[1]);
-  CHECK(filler >= 0);
-  dumper = pcap_dump_fopen(dead, fdopen(blocked[1], "w"));
-  CHECK(dumper != NULL);
-  if (dumper && filler >= 0) {
-    int fl = fcntl(filler, F_GETFL);
-    fcntl(filler, F_SETFL, fl | O_NONBLOCK);
-    char junk[4096];
-    memset(junk, 0, sizeof(junk));
-    while (write(filler, junk, sizeof(junk)) > 0) {
-    }
-    fcntl(filler, F_SETFL, fl);
-    close(filler);
-
-    struct sigaction old_term, old_alrm;
-    memset(&sa, 0, sizeof(sa));
-    sa.sa_handler = handle_stop_signal;
-    sigemptyset(&sa.sa_mask);
-    sigaction(SIGTERM, &sa, &old_term);
-    sa.sa_handler = raise_stop_signal;
-    sigaction(SIGALRM, &sa, &old_alrm);
-
-    g_stop = 0;
-    errno = 0;
-    alarm(1);
-    CHECK(check_output(dumper, "blocked") == -EINTR);
-    alarm(0);
-    CHECK(g_stop == 1);
-
-    sigaction(SIGTERM, &old_term, NULL);
-    sigaction(SIGALRM, &old_alrm, NULL);
-    g_stop = 0;
-    fcntl(fileno(pcap_dump_file(dumper)), F_SETFL, fl | O_NONBLOCK);
-    pcap_dump_close(dumper);
-  }
-  close(blocked[0]);
 
   pcap_close(dead);
 }

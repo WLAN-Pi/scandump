@@ -929,9 +929,8 @@ static FILE *open_output_file(const char *file) {
 // stream's error flag. The caller sets errno to 0 before writing, so that the
 // cause of a failed write is still in errno here. Returns 0 on success,
 // -EPIPE without a message if the output is a pipe or FIFO whose reader has
-// gone (SIGPIPE is ignored), -EINTR without a message if a stop signal
-// interrupted the flush (the handler has set g_stop), or -1 after printing
-// a diagnostic for any other failure.
+// gone (SIGPIPE is ignored), or -1 after printing a diagnostic for any other
+// failure.
 static int check_output(pcap_dumper_t *dumper, const char *name) {
 
   if (pcap_dump_flush(dumper) == 0 && !ferror(pcap_dump_file(dumper))) {
@@ -940,10 +939,6 @@ static int check_output(pcap_dumper_t *dumper, const char *name) {
 
   if (errno == EPIPE) {
     return -EPIPE;
-  }
-
-  if (errno == EINTR && g_stop) {
-    return -EINTR;
   }
 
   fprintf(stderr, "%s: %s\n", name,
@@ -1194,16 +1189,12 @@ int main(int argc, char *argv[]) {
     // Write the scan's frames and flush them, to a file as well as to
     // stdout, so that each finished scan is in the output even if scandump
     // is killed later. Stop on a write error rather than keep scanning into
-    // a broken output. A closed pipe or a stop signal during the flush is a
-    // quiet, successful stop.
+    // a broken output, and quietly if the reader closed the pipe.
     errno = 0;
     write_frames(&dump_ctx, dumper);
     err = check_output(dumper, output_name);
     if (err == -EPIPE) {
       output_closed = 1;
-      break;
-    }
-    if (err == -EINTR) {
       break;
     }
     if (err < 0) {
@@ -1232,7 +1223,7 @@ cleanup:
     // Skipped after an earlier error, which has been reported already, and
     // when the reader has gone.
     errno = 0;
-    if (exit_code == 0 && !output_closed && !g_stop &&
+    if (exit_code == 0 && !output_closed &&
         check_output(dumper, output_name) == -1) {
       exit_code = EXIT_RUNTIME_ERROR;
     }
