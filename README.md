@@ -190,7 +190,7 @@ The frames are reconstructed from the kernel's scan results, not captured over t
 
 ## Contributing
 
-Bug reports and pull requests are welcome on [GitHub](https://github.com/intuitibits/scandump). The build treats compiler warnings as errors, so `make` must succeed without warnings. `make check` runs the tests that don't need Wi-Fi hardware: frame construction from synthetic nl80211 scan results, option parsing and exit statuses. CI builds with GCC and Clang, runs static analysis, and builds and checks the Debian and Ubuntu packages on every pull request. To run the package checks locally, see [`packaging/README.md`](packaging/README.md).
+Bug reports and pull requests are welcome on [GitHub](https://github.com/intuitibits/scandump). The build treats compiler warnings as errors, so `make` must succeed without warnings. `make check` runs the tests that don't need Wi-Fi hardware: frame construction from synthetic nl80211 scan results, option parsing and exit statuses. CI builds with GCC and Clang, runs static analysis, and builds and checks the Debian trixie package on every pull request. To run the package checks locally, see [`packaging/README.md`](packaging/README.md).
 
 ## License
 

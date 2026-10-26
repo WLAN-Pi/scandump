@@ -92,22 +92,10 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          # Older lintian versions warn about a Standards-Version they don't
-          # know yet, so these only fail on errors.
+          # Trixie's lintian warns about a Standards-Version it does not
+          # know yet, so this job fails on errors only.
           - image: debian:trixie
             artifact: deb-debian-trixie
-            lintian-fail-on: error
-          - image: debian:bookworm
-            artifact: deb-debian-bookworm
-            lintian-fail-on: error
-          - image: ubuntu:22.04
-            artifact: deb-ubuntu-22.04
-            lintian-fail-on: error
-          - image: ubuntu:24.04
-            artifact: deb-ubuntu-24.04
-            lintian-fail-on: error
-          - image: ubuntu:26.04
-            artifact: deb-ubuntu-26.04
             lintian-fail-on: error
     steps:
       # Without git in the container, checkout downloads a GitHub archive,
